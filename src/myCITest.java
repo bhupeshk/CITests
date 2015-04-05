@@ -1,5 +1,4 @@
 
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -14,27 +13,14 @@ public class myCITest {
         driver.get("http://www.google.com/webhp?complete=1&hl=en");
         
         // Enter the query string "Cheese"
+        System.out.println("Finding search box");
         WebElement query = driver.findElement(By.name("q"));
-        query.sendKeys("Cheese");
-
-        // Sleep until the div we want is visible or 5 seconds is over
-        long end = System.currentTimeMillis() + 5000;
-        while (System.currentTimeMillis() < end) {
-            WebElement resultsDiv = driver.findElement(By.className("gssb_e"));
-
-            // If results have been returned, the results are displayed in a drop down.
-            if (resultsDiv.isDisplayed()) {
-              break;
-            }
-        }
-
-        // And now list the suggestions
-        List<WebElement> allSuggestions = driver.findElements(By.xpath("//td[@class='gssb_a gbqfsf']"));
+        System.out.println("Finding Cheese");
         
-        for (WebElement suggestion : allSuggestions) {
-            System.out.println(suggestion.getText());
-        }
-
+        query.sendKeys("Cheese");
+        driver.findElement(By.name("btnG")).click();
+        Thread.sleep(4000);
         driver.quit();
+        
     }
 }
